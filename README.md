@@ -90,8 +90,8 @@ The Bank Management System is a comprehensive web-based application designed to 
   spring.application.name=bankapplication
   spring.jpa.hibernate.ddl-auto=update
   spring.datasource.url=jdbc:mysql://localhost:3306/bankmanagement
-  spring.datasource.username=root
-  spring.datasource.password=root
+  spring.datasource.username=
+  spring.datasource.password=
   spring.thymeleaf.prefix=classpath:/templates/
   spring.thymeleaf.suffix=.html
   server.port=9191

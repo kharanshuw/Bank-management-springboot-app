@@ -104,10 +104,5 @@ The Bank Management System is a comprehensive web-based application designed to 
 
 Contributions are welcome! Please fork this repository and submit pull requests.
 
-#### License
-
-This project is licensed under the MIT License - see the `LICENSE` file for details.
 
 ---
-
-Feel free to use this repository description in your GitHub project. If you need any modifications or additional information, let me know! 😊

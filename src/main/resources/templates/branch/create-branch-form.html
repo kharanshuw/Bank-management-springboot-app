@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>create branch form </title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+
+
+
+    <!--ajax cdn -->
+    <script crossorigin="anonymous"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+
+
+    <!-- navbar style -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            /* Light Gray */
+        }
+
+
+
+        .navbar {
+            color: white;
+            background-color: #004080;
+            /* Navy Blue */
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .btn-login,
+        .btn-register {
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            background-color: #FFFFFF;
+            /* White */
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+        }
+
+        .btn-login:hover,
+        .btn-register:hover {
+            opacity: 0.8;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            background-color: #004080;
+            /* Navy Blue */
+            color: #FFD700;
+            /* Gold */
+            padding: 10px 20px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        /* logout button */
+        .btn-login,
+        .btn-register,
+        .btn-logout {
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #FFFFFF;
+            display: inline;
+            vertical-align: middle;
+            /* White for login and logout */
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+        }
+
+        .btn-login:hover,
+        .btn-register:hover,
+        .btn-logout:hover {
+            opacity: 0.8;
+        }
+
+
+        .btn-logout {
+            background-color: #FF0000;
+            /* Red */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-logout:hover {
+            opacity: 0.8;
+        }
+
+        /* logout button end */
+        /* login button  */
+        .btn-login {
+            background-color: #28a745;
+            /* Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-login:hover {
+            opacity: 0.8;
+        }
+
+        /* Spacing for navbar elements */
+        .d-flex.gap-3>* {
+            margin-left: 10px;
+            /* Adjust the margin value as needed */
+        }
+    </style>
+    <!-- navbar style end -->
+
+
+    <!-- go back button  -->
+    <style>
+        .go-back-btn {
+            margin-top: 20px;
+        }
+
+        .go-back-btn .btn {
+            background-color: #004080;
+            /* Navy Blue */
+            color: white;
+            border: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            text-transform: uppercase;
+        }
+
+        .go-back-btn .btn:hover {
+            background-color: #002d5f;
+            /* Darker Navy Blue */
+        }
+    </style>
+    <!-- go back button end -->
+
+
+    <!-- form styling start -->
+    <style>
+        .container {
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        .form-group label {
+            color: #004080;
+            /* Navy Blue */
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background-color: #004080;
+            /* Navy Blue */
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #002d5f;
+            /* Darker Navy Blue */
+        }
+    </style>
+    <!-- form styling end -->
+
+</head>
+
+<body>
+<!-- Navbar start -->
+<div class="container-fluid navbar ">
+    <div class="logo-container">
+        <div class="logo">
+            SPHEREBANK
+        </div>
+    </div>
+    <div class="d-flex gap-3 flex-row   align-items-center  ">
+        <a class="btn btn-login" th:href="@{/login}">LOGIN</a>
+        <a class="btn btn-register" th:href="@{/register}">REGISTER</a>
+
+        <form action="#" class="p-0 ml-2" method="post" th:action="@{/logout}">
+            <input class="btn-logout" type="submit" value="Logout">
+        </form>
+
+
+    </div>
+</div>
+<!-- Navbar end -->
+
+
+<!--   form div start -->
+
+<div class="mt-5  py-0  p-4 " style="margin-left: 10%; margin-right: 10%;">
+    <div class="form-title">
+        <h1 class="text-center text-decoration-underline mb-4 pt-3"  style="color: #002d5f;">Create Branch</h1>
+    </div>
+
+    <!-- form start -->
+    <form method="post" th:action="@{/admin/branch/processbranch}" th:object="${dto}"  class="d-flex flex-column justify-content-center">
+
+        <!-- branch name -->
+        <div class="form-group mb-3 d-flex flex-row    ">
+            <label for="branchname">Branch Name:</label>
+            <input class="form-control border   " id="branchname" required th:field="*{branchName}" type="text">
+            <div class="text-danger" th:errors="*{branchName}" th:if="${#fields.hasErrors('branchName')}">
+            </div>
+        </div>
+
+        <!-- phone number -->
+        <div class="form-group mb-3 d-flex flex-row ">
+            <label for="phoneno">Phone Number:</label>
+            <input class="form-control" id="phoneno" required th:field="*{contactNo}" type="number">
+            <div class="text-danger" th:errors="*{contactNo}" th:if="${#fields.hasErrors('contactNo')}">
+            </div>
+        </div>
+
+        <!-- email -->
+        <div class="form-group mb-3 d-flex flex-row gap-2 ">
+            <label for="email">Email:</label>
+            <input class="form-control" id="email" required th:field="*{email}" type="email">
+            <div class="text-danger" th:errors="*{email}" th:if="${#fields.hasErrors('email')}">
+            </div>
+        </div>
+
+        <!-- country -->
+        <div class="form-group mb-3 d-flex flex-row  gap-2 ">
+            <label for="country">Country:</label>
+            <select class="form-control" id="country" name="country" required>
+                <option value="">Select Country</option>
+                <th:block th:each="country : ${countries}">
+                    <option th:text="${country.countryName}" th:value="${country.id}"></option>
+                </th:block>
+            </select>
+        </div>
+
+        <!-- state -->
+        <div class="form-group mb-3 d-flex flex-row gap-2  ">
+            <label for="state">State:</label>
+            <select class="form-control" id="state" name="state" required>
+                <option value="">Select State</option>
+            </select>
+        </div>
+
+        <!-- district -->
+        <div class="form-group mb-3  d-flex flex-row gap-2 ">
+            <label for="district">District:</label>
+            <select class="form-control" id="district" name="district" required>
+                <option value="">Select District</option>
+            </select>
+        </div>
+
+        <!-- city -->
+        <div class="form-group mb-3 d-flex flex-row  gap-2 ">
+            <label for="city">City:</label>
+            <select class="form-control" id="city" name="cityid" required>
+                <option value="">Select City</option>
+            </select>
+        </div>
+
+        <!-- register button -->
+        <div class="d-flex justify-content-center mb-3">
+            <button class="btn btn-primary" type="submit">Register</button>
+        </div>
+    </form>
+    <!-- form end -->
+</div>
+
+<!--form div end -->
+
+
+<!-- go back button start -->
+
+<div class="border-5 d-flex flex-row  justify-content-center go-back-btn ">
+    <a class="btn btn-primary btn-lg  text-uppercase " th:href="@{/admin/home}">GO BACK</a>
+</div>
+<!-- go back button end  -->
+
+
+<!-- script for ajax request start -->
+<script>
+    $(document).ready(function () {
+        // Load states when country is selected
+        $('#country').change(function () {
+            var countryId = $(this).val();
+            $.ajax({
+                url: '/api/states/' + countryId,
+                method: 'GET',
+                success: function (states) {
+                    $('#state').empty().append('<option value="">Select State</option>');
+                    $.each(states, function (index, state) {
+                        $('#state').append('<option value="' + state.id + '">' + state.stateName + '</option>');
+                    });
+                }
+            });
+        });
+
+        // Load districts when state is selected
+        $('#state').change(function () {
+            var stateId = $(this).val();
+            $.ajax({
+                url: '/api/districts/' + stateId,
+                method: 'GET',
+                success: function (districts) {
+                    $('#district').empty().append('<option value="">Select District</option>');
+                    $.each(districts, function (index, district) {
+                        $('#district').append('<option value="' + district.id + '">' + district.districtName + '</option>');
+                    });
+                }
+            });
+        });
+
+        // Load cities when district is selected
+        $('#district').change(function () {
+            var districtId = $(this).val();
+            $.ajax({
+                url: '/api/cities/' + districtId,
+                method: 'GET',
+                success: function (cities) {
+                    $('#city').empty().append('<option value="">Select City</option>');
+                    $.each(cities, function (index, city) {
+                        $('#city').append('<option value="' + city.id + '">' + city.cityName + '</option>');
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error:', error);
+                }
+            });
+        });
+    });
+</script>
+
+<!-- script ajax request end  -->
+
+
+</body>
+
+</html>

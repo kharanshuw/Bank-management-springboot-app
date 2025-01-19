@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Registration Form</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script crossorigin="anonymous"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+
+
+        /* Navbar styles start */
+        .navbar {
+            width: 99%;
+            color: white;
+            background-color: #004080; /* Navy Blue */
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+       
+
+        .btn-login {
+            background-color: #FFFFFF;
+            /* White */
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        /* Hover effects */
+        .btn-register:hover,
+        .btn-login:hover {
+            opacity: 0.8;
+        }
+
+        /* Container for the logo */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        /* Styling the logo */
+        .logo {
+            background-color: #004080;
+            /* Navy Blue */
+            color: #FFD700;
+            /* Gold */
+
+            /* Circular shape */
+            width: 100px;
+            height: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Optional: Add a shadow effect */
+        .logo {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        /* Navbar styles end */
+
+
+        /* Registration form styles start */
+
+        .container {
+            margin-top: 60px;
+        }
+
+        .card-header {
+            background-color: #004080; /* Navy Blue */
+            color: white;
+        }
+
+        .form-group label {
+            color: #004080; /* Navy Blue */
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background-color: #004080; /* Navy Blue */
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #002d5f;
+        }
+
+        .text-primary {
+            color: #FFD700 !important; /* Gold */
+        }
+
+
+
+        /* Registration form styles end */
+
+        .login-here:hover{
+            cursor: pointer;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<!-- navbar start -->
+<div class="container-fluid navbar  ">
+    <div class="logo-container">
+        <div class="logo">
+            SPHEREBANK
+        </div>
+
+    </div>
+    <div class="d-flex gap-3">
+        <a class="btn-login" th:href="@{/login}"> LOGIN </a>
+        <a class="btn-register mr-3" th:href="@{/register}">REGISTER</a>
+    </div>
+</div>
+
+
+<!-- navbar end -->
+
+
+<!-- form div start  -->
+<div class="container ">
+
+
+    <div class="text-center h1 card-header  ">Register Form</div>
+
+    <div class="container border border-info mt-3">
+
+
+        <!-- form start -->
+
+        <form method="post" th:action="@{/processregistration}" th:object="${requestDto}">
+            <!-- email start -->
+            <div class="form-group row mb-3 mt-3  ">
+                <label class="col-md-4 col-form-label text-md-right" for="email">Email:</label>
+                <div class="col-md-6">
+                    <input class="form-control" id="email" required th:field="*{email}" type="email">
+                    <div class="text-danger" th:errors="*{email}" th:if="${#fields.hasErrors('email')}">
+                    </div>
+                </div>
+            </div>
+
+            <!-- password -->
+            <div class="form-group row mb-3">
+                <label class="col-md-4 col-form-label text-md-right" for="password">Password:</label>
+                <div class="col-md-6">
+                    <input class="form-control" id="password" required th:field="*{password}" type="password">
+                    <span class="text-danger" th:errors="*{password}"
+                          th:if="${#fields.hasErrors('password')}"></span>
+                </div>
+            </div>
+            <!-- first name -->
+            <div class="form-group row mb-3">
+                <label class="col-md-4 col-form-label text-md-right" for="fname">First Name:</label>
+                <div class="col-md-6">
+                    <input class="form-control" id="fname" required th:field="*{fname}" type="text">
+                    <span class="text-danger" th:errors="*{fname}" th:if="${#fields.hasErrors('fname')}"></span>
+                </div>
+            </div>
+            <!-- last name -->
+            <div class="form-group row mb-3">
+                <label class="col-md-4 col-form-label text-md-right" for="lname">Last Name:</label>
+                <div class="col-md-6">
+                    <input class="form-control" id="lname" required th:field="*{lname}" type="text">
+                    <span class="text-danger" th:errors="*{lname}" th:if="${#fields.hasErrors('lname')}"></span>
+                </div>
+            </div>
+            <!-- phone no  -->
+            <div class="form-group row mb-3">
+                <label class="col-md-4 col-form-label text-md-right" for="phoneno">Phone Number:</label>
+                <div class="col-md-6">
+                    <input class="form-control" id="phoneno" required th:field="*{phoneno}" type="tel">
+                    <span class="text-danger" th:errors="*{phoneno}" th:if="${#fields.hasErrors('phoneno')}"></span>
+                </div>
+            </div>
+
+            <!-- gender -->
+            <div class="mb-3">
+
+                <label class="form-label" for="formGroupExampleInput">Gender:</label>
+                <select aria-label="Default select example" class="form-select" th:field="*{gender}">
+
+                    <option id="male" th:value="male" value="male">Male</option>
+                    <option id="female" th:value="female" value="female">Female</option>
+
+                </select>
+
+                <span class="text-danger" th:errors="*{gender}" th:if="${#fields.hasErrors('gender')}"></span>
+            </div>
+
+
+            <!-- date of birth -->
+            <div class="form-group row mb-3">
+                <label class="col-md-4 col-form-label text-md-right" for="dob">Date of Birth:</label>
+                <div class="col-md-6">
+                    <input class="form-control" data-date-format="yyyy-mm-dd" id="dob" required th:field="*{dob}"
+                           type="date">
+
+                    <span class="text-danger" th:errors="*{dob}" th:if="${#fields.hasErrors('dob')}"></span>
+                </div>
+            </div>
+
+            <!-- country -->
+            <div class="form-group mb-3 ">
+                <label for="country">Country</label>
+                <select class="form-control" id="country" name="country" required>
+                    <option value="">Select Country</option>
+                    <th:block th:each="country : ${countries}">
+                        <option th:text="${country.countryName}" th:value="${country.id}"></option>
+                    </th:block>
+                </select>
+            </div>
+
+            <!-- state -->
+            <div class="form-group mb-3">
+                <label for="state">State</label>
+                <select class="form-control" id="state" name="state" required>
+                    <option value="">Select State</option>
+                </select>
+            </div>
+
+            <!-- district -->
+            <div class="form-group mb-3">
+                <label for="district">District</label>
+                <select class="form-control" id="district" name="district" required>
+                    <option value="">Select District</option>
+                </select>
+            </div>
+
+            <!-- city -->
+
+            <div class="form-group mb-3">
+                <label for="city">City</label>
+                <select class="form-control" id="city" name="cityid" required>
+                    <option value="">Select City</option>
+                </select>
+            </div>
+
+            <!-- register button -->
+
+            <div class="d-flex justify-content-center ">
+                <button class="btn btn-primary" type="submit">Register</button>
+            </div>
+
+
+        </form>
+
+        <!-- form end -->
+
+        <!-- Login Redirect -->
+        <div class="mt-3 text-center">
+            <p>Already have an account? <a class="text-primary login-here" th:href="@{/login}">Login here</a></p>
+        </div>
+
+
+    </div>
+
+
+</div>
+<!-- form div end  -->
+
+<!-- script for handling datepicker -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // make calendar date less than today's date
+        let userdate = document.getElementById('dob');
+        userdate.max = new Date().toISOString().split("T")[0];
+
+        var dobInput = document.getElementById("dob");
+
+        dobInput.addEventListener("input", function () {
+            var currentDate = new Date();
+            var selectedDate = new Date(dobInput.value);
+
+            if (selectedDate > currentDate) {
+                dobInput.setCustomValidity("Date must be before current date");
+            } else {
+                dobInput.setCustomValidity("");
+            }
+        });
+    });
+</script>
+
+<!--script for ajax request -->
+
+<script>
+    $(document).ready(function () {
+        // Load states when country is selected
+        $('#country').change(function () {
+            var countryId = $(this).val();
+            $.ajax({
+                url: '/api/states/' + countryId,
+                method: 'GET',
+                success: function (states) {
+                    $('#state').empty().append('<option value="">Select State</option>');
+                    $.each(states, function (index, state) {
+                        +            $('#state').append('<option value="' + state.id + '">' + state.stateName + '</option>');
+                    });
+                }
+            });
+        });
+
+        // Load districts when state is selected
+        $('#state').change(function () {
+            var stateId = $(this).val();
+            $.ajax({
+                url: '/api/districts/' + stateId,
+                method: 'GET',
+                success: function (districts) {
+                    $('#district').empty().append('<option value="">Select District</option>');
+                    $.each(districts, function (index, district) {
+                        $('#district').append('<option value="' + district.id + '">' + district.districtName + '</option>');
+                    });
+                }
+            });
+        });
+
+        // Load cities when district is selected
+        $('#district').change(function () {
+            var districtId = $(this).val();
+            console.log(districtId);
+            $.ajax({
+                url: '/api/cities/' + districtId,
+                method: 'GET',
+                success: function (cities) {
+
+                    console.log(cities);
+                    $('#city').empty().append('<option value="">Select City</option>');
+                    $.each(cities, function (index, city) {
+                        console.log(city.id);
+                        console.log(city.cityName);
+                        $('#city').append('<option value="' + city.id + '">' + city.cityName + '</option>');
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error:', error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+
+</html>

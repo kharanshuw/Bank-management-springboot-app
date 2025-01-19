@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Document</title>
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- navbar style -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            /* Light Gray */
+        }
+
+
+
+        .navbar {
+            color: white;
+            background-color: #004080;
+            /* Navy Blue */
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .btn-login,
+        .btn-register {
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            background-color: #FFFFFF;
+            /* White */
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+        }
+
+        .btn-login:hover,
+        .btn-register:hover {
+            opacity: 0.8;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            background-color: #004080;
+            /* Navy Blue */
+            color: #FFD700;
+            /* Gold */
+            padding: 10px 20px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        /* logout button */
+        .btn-login,
+        .btn-register,
+        .btn-logout {
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #FFFFFF;
+            display: inline;
+            vertical-align: middle;
+            /* White for login and logout */
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+        }
+
+        .btn-login:hover,
+        .btn-register:hover,
+        .btn-logout:hover {
+            opacity: 0.8;
+        }
+
+
+        .btn-logout {
+            background-color: #FF0000;
+            /* Red */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-logout:hover {
+            opacity: 0.8;
+        }
+
+        /* logout button end */
+        /* login button  */
+        .btn-login {
+            background-color: #28a745;
+            /* Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-login:hover {
+            opacity: 0.8;
+        }
+
+        /* Spacing for navbar elements */
+        .d-flex.gap-3>* {
+            margin-left: 10px;
+            /* Adjust the margin value as needed */
+        }
+    </style>
+    <!-- navbar style end -->
+
+    <!-- go back button  -->
+    <style>
+        .go-back-btn {
+            margin-top: 20px;
+        }
+
+        .go-back-btn .btn {
+            background-color: #004080;
+            /* Navy Blue */
+            color: white;
+            border: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            text-transform: uppercase;
+        }
+
+        .go-back-btn .btn:hover {
+            background-color: #002d5f;
+            /* Darker Navy Blue */
+        }
+    </style>
+    <!-- go back button end -->
+
+</head>
+
+<body>
+
+<!-- Navbar start -->
+<div class="container-fluid navbar ">
+    <div class="logo-container">
+        <div class="logo">
+            SPHEREBANK
+        </div>
+    </div>
+    <div class="d-flex gap-3 flex-row   align-items-center  ">
+        <a class="btn btn-login" th:href="@{/login}">LOGIN</a>
+        <a class="btn btn-register" th:href="@{/register}">REGISTER</a>
+
+        <form action="#" class="p-0 ml-2" method="post" th:action="@{/logout}">
+            <input class="btn-logout" type="submit" value="Logout">
+        </form>
+
+
+    </div>
+</div>
+<!-- Navbar end -->
+
+
+<!-- main container start -->
+
+
+<div class="container mt-5 p-4 bg-white shadow-lg   border rounded">
+    <h2 class="text-uppercase fs-1 fw-bold text-primary mb-4">USER Profile Information</h2>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold text-capitalize">account no </label>
+        <div class="col-sm-9">
+            <span class="text-capitalize" th:text="${dto.getAccountNo()}"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold text-capitalize">accountType </label>
+        <div class="col-sm-9">
+            <span class="text-capitalize" th:text="${dto.getAccountType()}"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold text-capitalize">balance </label>
+        <div class="col-sm-9">
+            <span class="text-capitalize" th:text="${dto.getBalance()}"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold text-capitalize">branch name </label>
+        <div class="col-sm-9">
+            <span class="text-capitalize" th:text="${dto.getBranch()}"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold text-capitalize">first name </label>
+        <div class="col-sm-9">
+            <span class="text-capitalize" th:text="${dto.getFname()}"></span>
+        </div>
+    </div>
+
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold text-capitalize">last name </label>
+        <div class="col-sm-9">
+            <span class="text-capitalize" th:text="${dto.getLname()}"></span>
+        </div>
+    </div>
+
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold text-capitalize">Ifsc no </label>
+        <div class="col-sm-9">
+            <span class="text-capitalize" th:text="${dto.getIfscCode()}"></span>
+        </div>
+    </div>
+
+
+    <div class="d-flex gap-10 bg-light p-3 text-capitalize justify-content-center flex-wrap ">
+
+
+        <!-- Deposit Money Button -->
+        <div>
+            <div class="col-sm-12 text-center">
+                <a class="btn btn-primary text-wrap text-capitalize"
+                   th:href="@{ /account/depositform  ( accountNo=${ dto.accountNo }   )  }">Deposit Money</a>
+            </div>
+        </div>
+        <!-- Deposit Money Button end -->
+
+        <!-- withdraw Money Button -->
+        <div>
+            <div class="col-sm-12 text-center">
+                <a class="btn btn-primary text-wrap text-capitalize "
+                   th:href="@{ /account/withdrawalform  ( accountNo=${ dto.accountNo }  ) }">withdrawal money</a>
+            </div>
+        </div>
+        <!-- withdrawl Money Button end -->
+
+        <!-- transaction start -->
+        <div>
+            <div class="col-sm-12 text-center">
+                <a class="btn btn-primary text-wrap text-capitalize "
+                   th:href="@{ /account/transactions  ( accountNo=${ dto.accountNo }  ) }">transaction</a>
+
+            </div>
+        </div>
+
+        <!-- transaction end -->
+
+
+        <div>
+            <a class="btn btn-primary  text-wrap  " style="height: 40px; width: 100px;" th:href="@{/user/home}">Go
+                Back</a>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- main container end -->
+
+
+</body>
+
+</html>

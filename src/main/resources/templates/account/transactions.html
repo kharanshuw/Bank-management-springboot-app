@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Document</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- navbar style -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            /* Light Gray */
+        }
+
+
+
+        .navbar {
+            color: white;
+            background-color: #004080;
+            /* Navy Blue */
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .btn-login,
+        .btn-register {
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            background-color: #FFFFFF;
+            /* White */
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+        }
+
+        .btn-login:hover,
+        .btn-register:hover {
+            opacity: 0.8;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            background-color: #004080;
+            /* Navy Blue */
+            color: #FFD700;
+            /* Gold */
+            padding: 10px 20px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        /* logout button */
+        .btn-login,
+        .btn-register,
+        .btn-logout {
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #FFFFFF;
+            display: inline;
+            vertical-align: middle;
+            /* White for login and logout */
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+        }
+
+        .btn-login:hover,
+        .btn-register:hover,
+        .btn-logout:hover {
+            opacity: 0.8;
+        }
+
+
+        .btn-logout {
+            background-color: #FF0000;
+            /* Red */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-logout:hover {
+            opacity: 0.8;
+        }
+
+        /* logout button end */
+        /* login button  */
+        .btn-login {
+            background-color: #28a745;
+            /* Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-login:hover {
+            opacity: 0.8;
+        }
+
+        /* Spacing for navbar elements */
+        .d-flex.gap-3>* {
+            margin-left: 10px;
+            /* Adjust the margin value as needed */
+        }
+    </style>
+    <!-- navbar style end -->
+
+
+</head>
+
+<body>
+
+<!-- Navbar start -->
+<div class="container-fluid navbar ">
+    <div class="logo-container">
+        <div class="logo">
+            SPHEREBANK
+        </div>
+    </div>
+    <div class="d-flex gap-3 flex-row   align-items-center  ">
+        <a class="btn btn-login" th:href="@{/login}">LOGIN</a>
+        <a class="btn btn-register" th:href="@{/register}">REGISTER</a>
+
+        <form action="#" class="p-0 ml-2" method="post" th:action="@{/logout}">
+            <input class="btn-logout" type="submit" value="Logout">
+        </form>
+
+
+    </div>
+</div>
+<!-- Navbar end -->
+
+
+<!-- main content start -->
+<div class="container">
+
+    <h2 class="text-center text-wrap  text-uppercase text-decoration-underline fw-bold  fs-6  mb-3 "
+        style="text-decoration: underline;">Transaction of <span th:text="${accountNo}"></span></h2>
+
+    <!-- table start -->
+    <table class="table table-bordered">
+
+
+        <!--        table head start -->
+        <thead>
+        <tr class="text-wrap text-capitalize  ">
+            <th>transaction date</th>
+            <th>amount</th>
+            <th>transaction type</th>
+        </tr>
+        </thead>
+        <!--        table head end -->
+
+
+        <!--        table body start -->
+        <tbody>
+        <tr th:each="a : ${list.content}">
+
+            <td class="text-center" th:text="${a.getDate()}"></td>
+            <td class="text-center" th:text="${a.getAmount()}"></td>
+            <td class="text-center" th:text="${a.getTransactionType()}"></td>
+
+        </tr>
+        <!-- Add more rows as needed -->
+
+
+        </tbody>
+        <!--        table body end -->
+
+
+    </table>
+
+    <!-- table end -->
+
+
+</div>
+
+<!-- main content end -->
+
+<!--next and previous button start-->
+<div class="container  d-flex flex-row justify-content-between align-items-start  flex-wrap gap-3"
+     th:if="${hasContent}">
+
+
+    <div class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3" th:if="${hasPrevious}">
+
+
+        <a class="btn  btn-block"
+           style="background-color: #004080;  color: white;" th:href="@{/account/transactions  (          pageNumber=${list.number-1} ,  accountNo=${accountNo}   ) }">
+            Previous
+        </a>
+
+
+    </div>
+
+
+    <div class="d-flex flex-row justify-content-center align-items-center flex-wrap gap-3" th:if="${hasNext}">
+
+
+        <a class="btn btn-block "
+           style="background-color: #004080;  color: white;" th:href="@{/account/transactions  (     pageNumber=${list.number+1} ,  accountNo=${accountNo}  ) }">
+            Next
+        </a>
+
+
+    </div>
+</div>
+<!--next and previous button end-->
+
+<!-- go back button start -->
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-primary btn-lg  text-uppercase " th:href="@{/user/home}">GO BACK</a>
+    </div>
+</div>
+<!-- go back button end -->
+
+
+</body>
+
+</html>

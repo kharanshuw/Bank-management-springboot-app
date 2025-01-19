@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>ALL USERS</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- navbar style -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            /* Light Gray */
+        }
+
+
+
+        .navbar {
+            color: white;
+            background-color: #004080;
+            /* Navy Blue */
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .btn-login,
+        .btn-register {
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            background-color: #FFFFFF;
+            /* White */
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+        }
+
+        .btn-login:hover,
+        .btn-register:hover {
+            opacity: 0.8;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            background-color: #004080;
+            /* Navy Blue */
+            color: #FFD700;
+            /* Gold */
+            padding: 10px 20px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        /* logout button */
+        .btn-login,
+        .btn-register,
+        .btn-logout {
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #FFFFFF;
+            display: inline;
+            vertical-align: middle;
+            /* White for login and logout */
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+        }
+
+        .btn-login:hover,
+        .btn-register:hover,
+        .btn-logout:hover {
+            opacity: 0.8;
+        }
+
+
+        .btn-logout {
+            background-color: #FF0000;
+            /* Red */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-logout:hover {
+            opacity: 0.8;
+        }
+
+        /* logout button end */
+        /* login button  */
+        .btn-login {
+            background-color: #28a745;
+            /* Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-login:hover {
+            opacity: 0.8;
+        }
+
+        /* Spacing for navbar elements */
+        .d-flex.gap-3>* {
+            margin-left: 10px;
+            /* Adjust the margin value as needed */
+        }
+    </style>
+</head>
+
+<body>
+<!-- Navbar start -->
+<div class="container-fluid navbar ">
+    <div class="logo-container">
+        <div class="logo">
+            SPHEREBANK
+        </div>
+    </div>
+    <div class="d-flex gap-3 flex-row   align-items-center  ">
+        <a class="btn btn-login" th:href="@{/login}">LOGIN</a>
+        <a class="btn btn-register" th:href="@{/register}">REGISTER</a>
+
+        <form action="#" class="p-0 ml-2" method="post" th:action="@{/logout}">
+            <input class="btn-logout" type="submit" value="Logout">
+        </form>
+
+
+    </div>
+</div>
+<!-- Navbar end -->
+
+
+<!-- main container start -->
+
+<div class="container mt-5 ">
+    <div class="fs-1 lead d-flex justify-content-center mb-3  "
+         style="font-weight: 800; font-size: 30px; text-decoration: underline; color: #004080;">
+        ALL USERS DETAILS
+    </div>
+    <table class="table table-bordered table-hover ">
+        <thead class="table-primary">
+        <tr>
+
+            <th>ID</th>
+            <th>FNAME</th>
+            <th>LNAME</th>
+            <th>GENDER</th>
+            <th>PHONENO</th>
+            <th>ROLES</th>
+            <th>EMAIL</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr class="align-middle" style="height: auto;" th:each="u : ${users}">
+
+            <td th:text="${u.getId()}">ID</td>
+            <td th:text="${u.getFname()}">FNAME</td>
+            <td th:text="${u.getLname()}">LNAME</td>
+            <td th:text="${u.getGender()}">GENDER</td>
+            <td th:text="${u.getPhoneno()}">PHONENO</td>
+            <td>
+
+                <ul>
+                    <li class="list-unstyled mb-0" th:each="role : ${u.getrolestring()}" th:text="${role}">ADMIN</li>
+
+                </ul>
+
+            </td>
+            <td th:text="${u.getEmail()}">pratik@gmail.com</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+</div>
+
+<!-- main container end -->
+
+
+<!-- go back button start -->
+
+<div class="border-5 d-flex flex-row  justify-content-center ">
+    <a class="btn btn-primary  text-uppercase " th:href="@{/admin/home}">GO BACK</a>
+</div>
+<!-- go back button end  -->
+</body>
+
+</html>

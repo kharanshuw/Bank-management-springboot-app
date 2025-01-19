@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>ADMIN PROFILE DATA </title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- navbar style -->
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            /* Light Gray */
+        }
+
+
+
+        .navbar {
+            color: white;
+            background-color: #004080;
+            /* Navy Blue */
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .btn-login,
+        .btn-register {
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            background-color: #FFFFFF;
+            /* White */
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+        }
+
+        .btn-login:hover,
+        .btn-register:hover {
+            opacity: 0.8;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            background-color: #004080;
+            /* Navy Blue */
+            color: #FFD700;
+            /* Gold */
+            padding: 10px 20px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        /* logout button */
+        .btn-login,
+        .btn-register,
+        .btn-logout {
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #FFFFFF;
+            display: inline;
+            vertical-align: middle;
+            /* White for login and logout */
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+        }
+
+        .btn-login:hover,
+        .btn-register:hover,
+        .btn-logout:hover {
+            opacity: 0.8;
+        }
+
+
+        .btn-logout {
+            background-color: #FF0000;
+            /* Red */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-logout:hover {
+            opacity: 0.8;
+        }
+
+        /* logout button end */
+        /* login button  */
+        .btn-login {
+            background-color: #28a745;
+            /* Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-login:hover {
+            opacity: 0.8;
+        }
+
+        /* Spacing for navbar elements */
+        .d-flex.gap-3>* {
+            margin-left: 10px;
+            /* Adjust the margin value as needed */
+        }
+    </style>
+
+    <!-- navbar style end -->
+
+    <!-- main container style start -->
+    <style>
+        .main-container {
+            padding: 20px;
+        }
+
+        .main-container h1 {
+            font-size: 1.5rem;
+            color: #004080;
+            /* Navy Blue */
+        }
+
+        .main-container span,
+        .main-container li {
+            font-size: 1.2rem;
+            color: #000;
+            /* Black */
+        }
+
+        .main-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .main-container ul li {
+            padding: 5px 0;
+        }
+    </style>
+    <!-- main container style end -->
+
+</head>
+
+<body>
+<!-- Navbar start -->
+<div class="container-fluid navbar ">
+    <div class="logo-container">
+        <div class="logo">
+            SPHEREBANK
+        </div>
+    </div>
+    <div class="d-flex gap-3 flex-row   align-items-center  ">
+        <a class="btn btn-login" th:href="@{/login}">LOGIN</a>
+        <a class="btn btn-register" th:href="@{/register}">REGISTER</a>
+
+        <form action="#" class="p-0 ml-2" method="post" th:action="@{/logout}">
+            <input class="btn-logout" type="submit" value="Logout">
+        </form>
+
+
+    </div>
+</div>
+<!-- Navbar end -->
+
+<!-- main container start -->
+
+
+<div class="container mt-5 p-4 bg-white shadow-lg   border rounded">
+    <h2 class="text-uppercase fs-1 fw-bold text-primary mb-4">Admin Profile Information</h2>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">User ID:</label>
+        <div class="col-sm-9">
+            <span class="text-uppercase" th:text="${user.getId()}">1</span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">Email:</label>
+        <div class="col-sm-9">
+            <span class="text-uppercase" th:text="${user.getEmail()}">pratik@gmail.com</span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">First Name:</label>
+        <div class="col-sm-9">
+            <span class="text-uppercase" th:text="${user.getFname()}">KHARANSHU</span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">Last Name:</label>
+        <div class="col-sm-9">
+            <span class="text-uppercase" th:text="${user.getLname()}">WANARE</span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">Gender:</label>
+        <div class="col-sm-9">
+            <span class="text-uppercase" th:text="${user.getGender()}">MALE</span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">Roles:</label>
+        <div class="col-sm-9">
+            <ul class="list-unstyled">
+                <li class="text-uppercase" th:each="ua : ${roles}" th:text="${ua}">ADMIN</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">Phone No:</label>
+        <div class="col-sm-9">
+            <span class="text-uppercase" th:text="${user.getPhoneno()}">9689025233</span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">City:</label>
+        <div class="col-sm-9">
+            <span class="text-uppercase" th:text="${user.getCitynameString()}">NAGPUR</span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">District:</label>
+        <div class="col-sm-9">
+            <span class="text-uppercase" th:text="${user.getDistrictnameString()}">NAGPUR</span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">State:</label>
+        <div class="col-sm-9">
+            <span class="text-uppercase" th:text="${user.getStateString()}">MAHARASHTRA</span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label fw-bold">Country:</label>
+        <div class="col-sm-9">
+            <span class="text-uppercase" th:text="${user.getCountryString()}">INDIA</span>
+        </div>
+    </div>
+
+    <div class="border-5 d-flex flex-row  justify-content-center ">
+        <a class="btn btn-primary  text-uppercase " th:href="@{/admin/home}">GO BACK</a>
+    </div>
+</div>
+
+
+<!-- main container end -->
+
+
+</body>
+
+</html>

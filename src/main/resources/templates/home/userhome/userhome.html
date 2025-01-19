@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<title>users Dashboard</title>
+
+	<!-- Bootstrap CSS -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+	<!-- Font Awesome CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+
+
+	<!-- navbar style -->
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			background-color: #f5f5f5;
+			/* Light Gray */
+		}
+
+
+
+		.navbar {
+			color: white;
+			background-color: #004080;
+			/* Navy Blue */
+			display: flex;
+			justify-content: space-between;
+			padding: 10px 20px;
+		}
+
+		.btn-login,
+		.btn-register {
+			color: #004080;
+			/* Navy Blue */
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			text-decoration: none;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		.btn-login {
+			background-color: #FFFFFF;
+			/* White */
+		}
+
+		.btn-register {
+			background-color: #FFD700;
+			/* Gold */
+		}
+
+		.btn-login:hover,
+		.btn-register:hover {
+			opacity: 0.8;
+		}
+
+		.logo-container {
+			display: flex;
+			align-items: center;
+		}
+
+		.logo {
+			background-color: #004080;
+			/* Navy Blue */
+			color: #FFD700;
+			/* Gold */
+			padding: 10px 20px;
+			border-radius: 50%;
+			font-size: 18px;
+			font-weight: bold;
+			text-align: center;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		}
+
+		.container {
+			margin-top: 20px;
+			flex: 1;
+		}
+
+		/* logout button */
+		.btn-login,
+		.btn-register,
+		.btn-logout {
+			color: #004080;
+			/* Navy Blue */
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			text-decoration: none;
+			font-size: 16px;
+			cursor: pointer;
+			background-color: #FFFFFF;
+			display: inline;
+			vertical-align: middle;
+			/* White for login and logout */
+		}
+
+		.btn-register {
+			background-color: #FFD700;
+			/* Gold */
+		}
+
+		.btn-login:hover,
+		.btn-register:hover,
+		.btn-logout:hover {
+			opacity: 0.8;
+		}
+
+
+		.btn-logout {
+			background-color: #FF0000;
+			/* Red */
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			text-decoration: none;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		.btn-logout:hover {
+			opacity: 0.8;
+		}
+
+		/* logout button end */
+		/* login button  */
+		.btn-login {
+			background-color: #28a745;
+			/* Green */
+			color: white;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 5px;
+			text-decoration: none;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		.btn-login:hover {
+			opacity: 0.8;
+		}
+
+		/* Spacing for navbar elements */
+		.d-flex.gap-3>* {
+			margin-left: 10px;
+			/* Adjust the margin value as needed */
+		}
+	</style>
+	<!-- navbar style end -->
+
+
+	<!-- footer style start  -->
+
+	<style>
+		/* footer style start */
+
+		footer {
+			background-color: #001f3f;
+			/* Darker Navy Blue */
+			color: white;
+			text-align: center;
+			padding: 20px;
+			width: 100%;
+
+			bottom: 2px;
+		}
+
+		footer a {
+			color: #FFD700;
+			/* Gold */
+			text-decoration: none;
+		}
+
+		footer a:hover {
+			text-decoration: underline;
+		}
+
+		.footer-social-buttons .btn {
+			background-color: #001f3f;
+			border: none;
+			color: white;
+		}
+
+		.footer-social-buttons .btn:hover {
+			background-color: #004080;
+		}
+
+		/* footer style end  */
+	</style>
+	<!-- footer style end  -->
+
+
+	<!-- main container start -->
+
+	<style>
+		/* main container start */
+		.main-container {
+			display: flex;
+			flex-wrap: wrap;
+			/* Enable flex wrap */
+			margin-top: 20px;
+			flex: 1;
+		}
+
+		.flex-item {
+			flex: 1 1 30%;
+			/* Flex item with basis of 30% */
+			padding: 10px;
+			margin: 10px;
+			background-color: white;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			/* No fixed height */
+		}
+
+
+
+		/* main container end  */
+	</style>
+	<!-- main container end  -->
+
+
+</head>
+
+<body>
+
+	<!-- Navbar start -->
+	<div class="container-fluid navbar ">
+		<div class="logo-container">
+			<div class="logo">
+				SPHEREBANK
+			</div>
+		</div>
+		<div class="d-flex gap-3 flex-row   align-items-center  ">
+			<a class="btn btn-login" th:href="@{/login}">LOGIN</a>
+			<a class="btn btn-register" th:href="@{/register}">REGISTER</a>
+
+			<form action="#" class="p-0 ml-2" method="post" th:action="@{/logout}">
+				<input class="btn-logout" type="submit" value="Logout">
+			</form>
+
+
+		</div>
+	</div>
+	<!-- Navbar end -->
+
+	<!-- main content start -->
+
+	<div class="container main-container  ">
+
+		<div class="flex-item  fw-bold  fs-6 ">
+			<p class="text-center text-dark text-wrap text-capitalize">user home</p>
+			<a class="btn btn-primary text-capitalize " th:href="@{/user/home}">home</a>
+		</div>
+
+		<div class="flex-item   fw-bold  fs-6  ">
+			<p class="text-center text-dark text-wrap text-capitalize">user data</p>
+			<a class="btn btn-primary text-capitalize " th:href="@{/user/profile}">Profile</a>
+		</div>
+
+
+		<div class="flex-item   fw-bold  fs-6   ">
+			<p class="text-center text-dark text-wrap text-capitalize">home</p>
+			<a class="btn btn-primary text-capitalize " th:href="@{/}">home</a>
+		</div>
+
+
+		<div class="flex-item   fw-bold  fs-6  ">
+			<p class="text-center text-dark text-wrap text-capitalize">Create Bank Account</p>
+			<a class="btn btn-primary text-capitalize " th:href="@{/account/choose-account-type}">Create Bank
+				Account</a>
+		</div>
+
+		<div class="flex-item   fw-bold  fs-6  ">
+			<p class="text-center text-dark text-wrap text-capitalize">all bank account</p>
+			<a class="btn btn-primary text-capitalize " th:href="@{/user/accounts}">accounts</a>
+		</div>
+
+		<div class="flex-item   fw-bold  fs-6  ">
+			<p class="text-center text-dark text-wrap text-capitalize">delete account</p>
+			<a class="btn btn-primary text-capitalize " th:href="@{/user/delete}">delete</a>
+		</div>
+
+
+	</div>
+
+	<!-- main content end -->
+
+
+	<!-- Footer start -->
+	<footer class="position-relative bottom-1">
+		<div class="footer-social-buttons d-flex justify-content-center py-5">
+			<button class="btn btn-lg btn-floating mx-2" type="button">
+				<i class="fab fa-facebook"></i>
+			</button>
+			<button class="btn btn-lg btn-floating mx-2" type="button">
+				<i class="fab fa-youtube"></i>
+			</button>
+			<button class="btn btn-lg btn-floating mx-2" type="button">
+				<i class="fab fa-instagram"></i>
+			</button>
+			<button class="btn btn-lg btn-floating mx-2" type="button">
+				<i class="fab fa-twitter"></i>
+			</button>
+		</div>
+
+		<div class="text-center p-3" style="background-color: #0e345a;">
+			© 2024 Copyright:
+			<a class="text-white" href="https://mdbootstrap.com/">@SPHERE BANK</a>
+		</div>
+	</footer>
+	<!-- Footer end -->
+
+</body>
+
+
+</html>

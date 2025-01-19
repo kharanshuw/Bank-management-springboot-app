@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Options</title>
+
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet">
+
+
+    <script crossorigin="anonymous"
+            integrity="sha512-heZj7rPbZHWyOEhE34vsJkzj2DKK2mZ9D3jjMkXQJ0uMGu/m5iOty+le26NL1eFZ5+qa4XBYcflwYwITwCWufw=="
+            referrerpolicy="no-referrer"
+            src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.4.0/esm/ionicons.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            /* Light Gray */
+
+        }
+        .navbar {
+            color: white;
+            background-color: #004080;
+            /* Navy Blue */
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .btn-login,
+        .btn-register {
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            background-color: #FFFFFF;
+            /* White */
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+        }
+
+        .btn-login:hover,
+        .btn-register:hover {
+            opacity: 0.8;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            background-color: #004080;
+            /* Navy Blue */
+            color: #FFD700;
+            /* Gold */
+            padding: 10px 20px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            color: #004080;
+            /* Navy Blue */
+        }
+
+        .btn-primary,
+        .btn-success,
+        .btn-info {
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+
+        .btn-primary {
+            background-color: #004080;
+            /* Navy Blue */
+        }
+
+        .btn-primary:hover {
+            background-color: #002d5f;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            /* Green */
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            /* Cyan */
+        }
+
+        .btn-info:hover {
+            background-color: #117a8b;
+        }
+
+        footer {
+            background-color: #001f3f;
+            /* Darker Navy Blue */
+            color: white;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+        }
+
+        footer a {
+            color: #FFD700;
+            /* Gold */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-social-buttons .btn {
+            background-color: #001f3f;
+            border: none;
+            color: white;
+        }
+
+        .footer-social-buttons .btn:hover {
+            background-color: #004080;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- navbar start -->
+
+<div class="container-fluid navbar  ">
+    <div class="logo-container">
+        <div class="logo">
+            SPHEREBANK
+        </div>
+
+    </div>
+    <div class="d-flex gap-3">
+        <a class="btn-login" th:href="@{/login}"> LOGIN </a>
+        <a class="btn-register mr-3" th:href="@{/register}">REGISTER</a>
+    </div>
+</div>
+
+<!-- navbar end -->
+
+<!-- section start -->
+<div class="container">
+    <!-- Authenticated User Section -->
+    <div sec:authorize="isAuthenticated()">
+        <h1 class="mb-3">Hello users <span th:text="${email}"></span></h1>
+    </div>
+
+    <!-- Admin Section -->
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <p>This content is only shown to admin.</p>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Hello Admin</h5>
+                        <a class="btn btn-primary" th:href="@{/admin/home}">Go to admin Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Section -->
+    <div sec:authorize="hasRole('ROLE_USER')">
+        <p>This content is only shown to users.</p>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Hello User</h5>
+                        <a class="btn btn-success" th:href="@{/user/home}">Go to users Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Manager Section -->
+    <div sec:authorize="hasRole('ROLE_MANAGER')">
+        <p>This content is only shown to managers.</p>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Hello Manager</h5>
+                        <a class="btn btn-info" th:href="@{/manager/home}">Go to manager Dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- section end -->
+
+
+<!-- Footer start -->
+<footer>
+    <div class="footer-social-buttons d-flex justify-content-center py-5">
+        <button class="btn btn-lg btn-floating mx-2" type="button">
+            <i class="fa-brands fa-facebook"></i>
+        </button>
+        <button class="btn btn-lg btn-floating mx-2" type="button">
+            <i class="fab fa-youtube"></i>
+        </button>
+        <button class="btn btn-lg btn-floating mx-2" type="button">
+            <i class="fab fa-instagram"></i>
+        </button>
+        <button class="btn btn-lg btn-floating mx-2" type="button">
+            <i class="fab fa-twitter"></i>
+        </button>
+    </div>
+
+    <div class="text-center p-3" style="background-color: #0e345a;">
+        © 2024 Copyright:
+        <a class="text-white" href="https://mdbootstrap.com/">@SPHERE BANK</a>
+    </div>
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Document</title>
+
+
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet">
+
+
+    <script crossorigin="anonymous"
+            integrity="sha512-heZj7rPbZHWyOEhE34vsJkzj2DKK2mZ9D3jjMkXQJ0uMGu/m5iOty+le26NL1eFZ5+qa4XBYcflwYwITwCWufw=="
+            referrerpolicy="no-referrer"
+            src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.4.0/esm/ionicons.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+
+        }
+
+        
+
+        .navbar {
+            width: 99%;
+            color: white;
+            background-color: #004080; /* Navy Blue */
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+padding: 10px 20px;
+        }
+
+        .btn-login {
+            background-color: #FFFFFF;
+            /* White */
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn-register {
+            background-color: #FFD700;
+            /* Gold */
+            color: #004080;
+            /* Navy Blue */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        /* Hover effects */
+        .btn-register:hover,
+        .btn-login:hover {
+            opacity: 0.8;
+        }
+
+        /* Container for the logo */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        /* Styling the logo */
+        .logo {
+            background-color: #004080;
+            /* Navy Blue */
+            color: #FFD700;
+            /* Gold */
+
+            /* Circular shape */
+            width: 100px;
+            height: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Optional: Add a shadow effect */
+        .logo {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-section {
+            padding: 60px 20px;
+        }
+
+        .welcome-section {
+            background-color: #f8f9fa;
+            /* Light Gray */
+            text-align: center;
+        }
+
+        .welcome-section h1 {
+            color: #004080;
+            /* Navy Blue */
+        }
+
+        .services-section,
+        .benefits-section,
+        .get-started-section {
+            background-color: #ffffff;
+            /* White */
+            padding: 40px 20px;
+        }
+
+        .section-header {
+            color: #004080;
+            /* Navy Blue */
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card-body h5 {
+            color: #FFD700;
+            /* Gold */
+        }
+
+        .btn-primary {
+            background-color: #004080;
+            /* Navy Blue */
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #002d5f;
+        }
+    </style>
+</head>
+
+
+<body>
+<!-- navbar start -->
+<div class="container-fluid navbar  ">
+    <div class="logo-container">
+        <div class="logo">
+            SPHEREBANK
+        </div>
+
+    </div>
+    <div class="d-flex gap-3">
+        <a class="btn-login" th:href="@{/login}"> LOGIN </a>
+        <a class="btn-register mr-3" th:href="@{/register}">REGISTER</a>
+    </div>
+</div>
+
+
+<!-- navbar end -->
+
+
+<!-- main section start -->
+
+
+<!-- Main Content Section -->
+<div class="container">
+    <section class="content-section welcome-section" id="home">
+        <h1>Welcome to BankApp</h1>
+        <p>Your trusted partner in managing your finances.</p>
+    </section>
+
+    <section class="content-section services-section" id="services">
+        <h2 class="section-header">Our Services</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Personal Banking</h5>
+                        <p class="card-text">Enjoy a variety of personal banking services designed to cater to your
+                            individual needs.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Business Banking</h5>
+                        <p class="card-text">Our business banking solutions help you manage your company's finances
+                            effectively.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Digital Banking</h5>
+                        <p class="card-text">Experience the convenience of banking from anywhere with our digital
+                            banking services.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section benefits-section" id="benefits">
+        <h2 class="section-header">Why Choose Us</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Security</h5>
+                        <p class="card-text">Your security is our top priority. We ensure the highest level of
+                            protection for your transactions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Support</h5>
+                        <p class="card-text">Our 24/7 customer support is always available to assist you with any
+                            queries or issues.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Convenience</h5>
+                        <p class="card-text">Manage your finances effortlessly with our user-friendly online banking
+                            platform.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section get-started-section" id="get-started">
+        <h2 class="section-header">Get Started</h2>
+        <p>Ready to join BankApp? Click the button below to open an account and take the first step towards a better
+            banking experience.</p>
+        <a class="btn btn-primary" href="#">Open an Account</a>
+    </section>
+</div>
+
+<!-- main section end -->
+<!-- footer start -->
+
+<div class="container-fluid  footer" style="position: relative; bottom: 1px;">
+
+    <footer class="text-center text-lg-start" style="background-color: #001f3f;">
+        <div class="container d-flex justify-content-center py-5">
+            <button class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #001f3f;"
+                    type="button">
+                <i class="fa-brands fa-facebook"></i>
+            </button>
+            <button class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #001f3f;"
+                    type="button">
+                <i class="fab fa-youtube"></i>
+            </button>
+            <button class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #001f3f;"
+                    type="button">
+                <i class="fab fa-instagram"></i>
+            </button>
+            <button class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: #001f3f;"
+                    type="button">
+                <i class="fab fa-twitter"></i>
+            </button>
+        </div>
+
+        <!-- Copyright -->
+        <div class="text-center text-white p-3" style="background-color: #0e345a;">
+            © 2024 Copyright:
+            <a class="text-white" href="https://mdbootstrap.com/">@SPHERE BANK</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- footer end -->
+</div>
+<!-- End of .container -->
+
+<script crossorigin="anonymous"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

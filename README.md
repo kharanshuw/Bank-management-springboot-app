@@ -38,7 +38,7 @@ The Bank Management System is a comprehensive web-based application designed to 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/bank-management-system.git
+   git clone https://github.com/kharanshuw/Bank-management-springboot-app.git
    cd bank-management-system
    ```
 
